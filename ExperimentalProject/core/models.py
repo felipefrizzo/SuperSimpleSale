@@ -68,3 +68,5 @@ class Product(models.Model):
 
     def price_formated(self):
         return 'R$ {}'.format(number_format(self.price))
+
+    price_formated.short_description = 'Preço'
