@@ -40,9 +40,11 @@ class Person(Address):
     def document_formated(self):
         formated = '{}.{}.{}/{}-{}'.format(self.document[0:2], self.document[2:5], self.document[5:8],
                                            self.document[8:12], self.document[12:14]) \
-            if self.document.__len__() > 12 else '{}.{}.{}-{}'.format(
-            self.document[0:2], self.document[2:5], self.document[5:8], self.document[8:12], self.document[12:14])
+            if len(str(self.document)) == 14 else '{}.{}.{}-{}'.format(
+            self.document[0:3], self.document[3:6], self.document[6:9], self.document[9:13], self.document[13:15])
         return formated
+
+    document_formated.short_description = 'CNPJ/CPF'
 
 
 class Product(models.Model):
