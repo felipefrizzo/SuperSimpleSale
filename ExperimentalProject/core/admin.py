@@ -6,12 +6,12 @@ from ExperimentalProject.core.models import Person, Product
 
 class PersonAdmin(admin.ModelAdmin):
     form = PersonForm
-    list_display = ('name', 'document_formated', 'phone', 'email', 'is_supplier')
+    list_display = ('name', 'fancy_name', 'document_formated', 'phone', 'email', 'is_supplier')
 
 
 class ProductAdmin(admin.ModelAdmin):
     form = ProductForm
-    list_display = ('inactive', 'name', 'bar_code', 'price_formated', 'ncm')
+    list_display = ('name', 'bar_code', 'price_formated', 'ncm', 'inactive')
 
 
 admin.site.register(Person, PersonAdmin)

@@ -12,6 +12,8 @@ class PersonForm(forms.ModelForm):
 
 
 class ProductForm(forms.ModelForm):
+    price = forms.DecimalField(label='Preço', max_digits=15, decimal_places=2, localize=True)
+
     class Meta:
         model = Product
         fields = '__all__'

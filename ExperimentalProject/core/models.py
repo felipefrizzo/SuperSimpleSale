@@ -21,7 +21,7 @@ class Address(models.Model):
 class Person(Address):
     is_supplier = models.BooleanField('fornecedor')
     name = models.CharField('nome', max_length=255)
-    fancy_name = models.CharField('nome fantasia/apelido', max_length=255)
+    fancy_name = models.CharField('nome fantasia/apelido', max_length=255, null=True, blank=True)
     document = models.CharField('CNPJ/CPF', max_length=18, unique=True, null=True)
     phone = models.CharField('telefone', max_length=18, blank=True, null=True)
     email = models.EmailField('e-mail', max_length=255, blank=True, null=True)
@@ -67,6 +67,6 @@ class Product(models.Model):
         return resolve_url('product', self.pk)
 
     def price_formated(self):
-        return 'R$ {}'.format(number_format(self.price))
+        return 'R$ {}'.format(number_format(self.price, 2))
 
     price_formated.short_description = 'Preço'
