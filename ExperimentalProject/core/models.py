@@ -52,7 +52,7 @@ class Product(models.Model):
     name = models.CharField('nome', max_length=255)
     bar_code = models.CharField('código de barra', max_length=30, unique=True, null=True)
     price = models.DecimalField('preço', max_digits=15, decimal_places=2)
-    ncm = models.CharField('NCM', max_length=20)
+    ncm = models.CharField('NCM', max_length=10)
     created_at = models.DateTimeField('criando em', auto_now_add=True)
 
     class Meta:
