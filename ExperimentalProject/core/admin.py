@@ -1,7 +1,7 @@
 from django.contrib import admin
 
-from ExperimentalProject.core.forms import PersonForm, ProductForm
-from ExperimentalProject.core.models import Person, Product
+from ExperimentalProject.core.forms import PersonForm, ProductForm, PaymentForm
+from ExperimentalProject.core.models import Person, Product, Payment
 
 
 class PersonAdmin(admin.ModelAdmin):
@@ -18,6 +18,13 @@ class ProductAdmin(admin.ModelAdmin):
     list_filter = ('inactive', 'ncm')
 
 
+class PaymentAdmin(admin.ModelAdmin):
+    form = PaymentForm
+    list_display = ('name', 'addtions')
+    search_fields = ('name')
+
+
+admin.site.register(Payment, PaymentAdmin)
 admin.site.register(Person, PersonAdmin)
 admin.site.register(Product, ProductAdmin)
 admin.site.site_header = 'Super Simple Sale (3S)'
