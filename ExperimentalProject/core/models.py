@@ -70,3 +70,20 @@ class Product(models.Model):
         return 'R$ {}'.format(number_format(self.price, 2))
 
     price_formated.short_description = 'Preço'
+
+
+class Payment(models.Model):
+        name = models.CharField('Pagamento',max_length=255)
+        additions = models.DecimalField('Acrésimos', max_digits=15, decimal_places=2)
+
+        class Meta:
+            ordering = ['name']
+            verbose_name = ['Forma de Pagamento']
+            verbose_name_plural ['formas de pagamentos']
+
+        def __str__(self):
+            return self.name
+
+        def get_absolute_url(self):
+            return resolve_url('Payment', self.pf)
+             
