@@ -1,6 +1,6 @@
 from django import forms
 
-from ExperimentalProject.core.models import Person, Product
+from ExperimentalProject.core.models import Person, Product, Payment
 
 
 class PersonForm(forms.ModelForm):
@@ -16,4 +16,12 @@ class ProductForm(forms.ModelForm):
 
     class Meta:
         model = Product
+        fields = '__all__'
+
+
+class PaymentForm(forms.ModelForm):
+    additions = forms.DecimalField(label='acrecimo', max_digits = 4, decimal_places = 2, localize = True)
+    
+    class Meta:
+        model = Payment
         fields = '__all__'
