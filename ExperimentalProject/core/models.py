@@ -78,12 +78,11 @@ class Payment(models.Model):
 
         class Meta:
             ordering = ['name']
-            verbose_name = ['Forma de Pagamento']
-            verbose_name_plural ['formas de pagamentos']
+            verbose_name = 'Forma de Pagamento'
+            verbose_name_plural 'formas de pagamentos'
 
         def __str__(self):
             return self.name
 
         def get_absolute_url(self):
             return resolve_url('Payment', self.pf)
-             
