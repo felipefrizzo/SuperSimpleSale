@@ -86,3 +86,49 @@ class Payment(models.Model):
 
         def get_absolute_url(self):
             return resolve_url('Payment', self.pf)
+
+
+class Sale(models.Model):
+    client = models.ForeignKey('Person', null=True, blank=True,verbose_name='Cliente')
+    payment = models.ForeignKey('Payment',verbose_name ='Pagamento')
+    created_at = models.DateTimeField('Criado em', auto_now_add=True)
+
+    class Meta:
+        verbose_name = 'venda'
+        verbose_name_plural = 'vendas'
+
+    def __str__(self):
+        return self.client.name
+
+    def get_absolute_url(self):
+        return resolve_url('sale', self.pk)
+
+    def get_total(self):
+        qs = self.sale_dat.filter(sale = self.pk)
+        total = 0 if isinstance(qs,int) else sum(map(lambda q: q[0]*q[1],qs))
+        return 'R$ {}'.format(number_format(total))
+
+
+class SaleIten(models.Model):
+    sale = models.ForeignKey('Sale',related_name=sale_dat)
+    item = models.ForeignKey('Product', verbose_name='Produto')
+    quantity = models.PositiveIntegerField('Quantidade')
+    price = models.DecimalField('Preço', max_digits=15, decimal_places=2)
+
+    class Meta:
+        verbose_name = 'Item venda'
+        verbose_name_plural = 'Itens venda'
+
+    def __str__(self):
+        return self.sale.client.name
+
+    def get_subtotal(self):
+        return self.price * (self.quantity or 0)
+
+    subtotal = property(get_subtotal)
+
+    def subtotal_formated(self):
+        return 'R$ {}'.format(number_format(self.subtotal))
+
+    def price_formated(self):
+        return 'R$ {}'.format(number_format(self.price))
