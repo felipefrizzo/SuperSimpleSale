@@ -73,24 +73,24 @@ class Product(models.Model):
 
 
 class Payment(models.Model):
-        name = models.CharField('Pagamento',max_length=255)
-        additions = models.DecimalField('Acrésimos', max_digits=15, decimal_places=2)
+    name = models.CharField('Pagamento',max_length=255)
+    additions = models.DecimalField('Acrésimos', max_digits=15, decimal_places=2)
 
-        class Meta:
-            ordering = ['name']
-            verbose_name = 'Forma de Pagamento'
-            verbose_name_plural 'formas de pagamentos'
+    class Meta:
+        ordering = ['name']
+        verbose_name = 'Forma de Pagamento'
+        verbose_name_plural = 'formas de pagamentos'
 
-        def __str__(self):
-            return self.name
+    def __str__(self):
+        return self.name
 
-        def get_absolute_url(self):
-            return resolve_url('Payment', self.pf)
+    def get_absolute_url(self):
+        return resolve_url('Payment', self.pf)
 
 
 class Sale(models.Model):
-    client = models.ForeignKey('Person', null=True, blank=True,verbose_name='Cliente')
-    payment = models.ForeignKey('Payment',verbose_name ='Pagamento')
+    client = models.ForeignKey('Person', null=True, blank=True, verbose_name='Cliente')
+    payment = models.ForeignKey('Payment', verbose_name='Pagamento')
     created_at = models.DateTimeField('Criado em', auto_now_add=True)
 
     class Meta:
@@ -104,13 +104,13 @@ class Sale(models.Model):
         return resolve_url('sale', self.pk)
 
     def get_total(self):
-        qs = self.sale_dat.filter(sale = self.pk)
-        total = 0 if isinstance(qs,int) else sum(map(lambda q: q[0]*q[1],qs))
+        qs = self.sale_dat.filter(sale=self.pk)
+        total = 0 if isinstance(qs, int) else sum(map(lambda q: q[0]*q[1],qs))
         return 'R$ {}'.format(number_format(total))
 
 
-class SaleIten(models.Model):
-    sale = models.ForeignKey('Sale',related_name=sale_dat)
+class SaleItem(models.Model):
+    sale = models.ForeignKey('Sale', related_name='sale_dat')
     item = models.ForeignKey('Product', verbose_name='Produto')
     quantity = models.PositiveIntegerField('Quantidade')
     price = models.DecimalField('Preço', max_digits=15, decimal_places=2)

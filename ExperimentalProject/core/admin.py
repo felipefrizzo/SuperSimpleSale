@@ -19,7 +19,7 @@ class ProductAdmin(admin.ModelAdmin):
 
 class PaymentAdmin(admin.ModelAdmin):
     form = PaymentForm
-    list_display = ('name', 'addtions')
+    list_display = ('name', 'additions')
     search_fields = ('name',)
 
 
@@ -28,15 +28,15 @@ class SaleItemAdmin(admin.TabularInline):
     extra = 1
     
     
-class SalaAdmin(admin.ModelAdmin):
-    fieldsets = [
-        (Nome, {'fields': ['client']}),
-        (Nome, {'fields': ['payment']}),
-        ]
-    inlines = [SaleItemAdmin]
+class SaleAdmin(admin.ModelAdmin):
     model = Sale
-        
-    list_display = ('person', 'get_total', 'payment', 'created_at')
+    inlines = [SaleItemAdmin]
+    fieldsets = [
+        (None, {'fields': ['client']}),
+        (None, {'fields': ['payment']}),
+        ]
+
+    list_display = ('client', 'get_total', 'payment', 'created_at')
         
 
 admin.site.register(Payment, PaymentAdmin)
