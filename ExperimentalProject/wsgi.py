@@ -1,5 +1,5 @@
 """
-WSGI config for ExperimentalProject project.
+WSGI config for representate_com project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
@@ -8,9 +8,10 @@ https://docs.djangoproject.com/en/1.9/howto/deployment/wsgi/
 """
 
 import os
+from dj_static import Cling
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "ExperimentalProject.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "representate_com.settings")
 
-application = get_wsgi_application()
+application = Cling(get_wsgi_application())

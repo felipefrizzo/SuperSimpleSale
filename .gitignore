@@ -75,3 +75,4 @@ target/
 
 *.sqlite3
 
+.env
